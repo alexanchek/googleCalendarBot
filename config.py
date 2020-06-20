@@ -1,3 +1,6 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+
 TOKEN = '1216192314:AAFkFLZcjICVIx0EiSkBo0oTexfJ5ppBHrI' # токен телеграм ботп
 
 # proxy config
