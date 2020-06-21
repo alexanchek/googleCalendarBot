@@ -9,8 +9,8 @@ PORT = '999'
 USER = '427107060'
 PASSWORD = 'SKWGuGsh'
 
-IP2 = 'ss-01.s5.ynvv.cc'
-PORT2 = '999'
-USER2 = '427107060'
-PASSWORD2 = 'SKWGuGsh'
+IP2 = '45.13.194.154'
+PORT2 = '30001'
+USER2 = 'dreamtheater_list_ru'
+PASSWORD2 = 'e35dd34d7e'
 
