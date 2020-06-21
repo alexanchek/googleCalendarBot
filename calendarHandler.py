@@ -1,3 +1,6 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from apiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 import pickle
