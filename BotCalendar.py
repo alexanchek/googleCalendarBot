@@ -11,7 +11,7 @@ users = [427107060, 274293840]
 # TODO: CHANGE USER AGENT TO 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko)
 #  Chrome/56.0.2924.87 Safari/537.36' IN requests,utils.py
 apihelper.proxy = {
-    'https': 'socks5://{}:{}@{}:{}'.format(USER, PASSWORD, IP, PORT)
+    'https': 'socks5://{}:{}@{}:{}'.format(USER2, PASSWORD2, IP2, PORT2)
 }
 
 bot = telebot.TeleBot(TOKEN)
