@@ -53,4 +53,5 @@ def upcomingEvents():
             hr_line = '========================================================'
             # собираем все воедино
             msg = msg + '%s\n%s\n%s\n%s\n\n' % (ev_title, ev_start, cal_link, hr_line)
+
     return msg
