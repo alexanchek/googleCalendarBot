@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from apiclient.discovery import build
+from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 import pickle
 import datetime
@@ -17,9 +17,9 @@ def upcomingEvents():
     credentials = pickle.load(open("token.pkl", "rb"))
     print(credentials)
 
-    service = build("calendar", "v3", credentials=credentials)
+    service = build("calendar", "v3", credentials=credentials, cache_discovery=False)
 
-    now = datetime.datetime.utcnow() - datetime.timedelta(hours=8.5) # вычитаем 8 часов, стартовая граница дня
+    now = datetime.datetime.utcnow() - datetime.timedelta(hours=8.5)  # вычитаем 8 часов, стартовая граница дня
     now = now.isoformat() + 'Z'
     endDay = datetime.datetime.now() + datetime.timedelta(hours=15.5) # прибавляем до финальной граниы дня
     endDay = endDay.isoformat() + 'Z'
@@ -49,7 +49,7 @@ def upcomingEvents():
             # берем дату
             ev_start = event['start'].get('dateTime')
             # превращаем в удобоваримый формат день-месяц-год и время
-            ev_start = dateutil.parser.parse(ev_start).strftime("%d.%m.%Y %H:%M")
+            ev_start = dateutil.parser.parse(ev_start).strftime("%d.%m.%Y в %H:%M")
             hr_line = '========================================================'
             # собираем все воедино
             msg = msg + '%s\n%s\n%s\n%s\n\n' % (ev_title, ev_start, cal_link, hr_line)
