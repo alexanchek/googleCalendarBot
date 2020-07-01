@@ -7,7 +7,6 @@ import telebot
 from config import *
 import time
 import logging
-from writer import writer
 
 users = [427107060]
 
