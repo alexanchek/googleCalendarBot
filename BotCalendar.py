@@ -36,10 +36,10 @@ def get_text_messages(message):
 # функция для добавления нового места, ну клево же!
 @bot.message_handler(func=lambda message: message.chat.id in users, commands=['place'])
 def get_text_messages(message):
+    sent = bot.send_message(message.from_user.id, 'Напиши плз в формате <b>город</b> / <b>место</b> /'
+                                                  '<b>краткое описание</b>  и я запомню это местечко!',
+                            parse_mode='HTML')
     try:
-        sent = bot.send_message(message.from_user.id, 'Напиши плз в формате <b>город</b> / <b>место</b> /'
-                                                      '<b>краткое описание</b>  и я запомню это местечко!',
-                                parse_mode='HTML')
         bot.register_next_step_handler(sent, twoStepWriterFile)
     except Exception as e:
         logging.error("Exception occured: ", exc_info=True)
