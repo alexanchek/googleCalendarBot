@@ -14,39 +14,43 @@ apihelper.proxy = {
     'https': 'socks5h://{}:{}@{}:{}'.format(USER2, PASSWORD2, IP2, PORT2)
 }
 
-bot = telebot.TeleBot(TOKEN)
+telebot.apihelper.READ_TIMEOUT = 5
+
+bot = telebot.TeleBot(TOKEN, threaded=False)
 
 
 # обработка команды event
 @bot.message_handler(func=lambda message: message.chat.id in users, commands=['event'])
 def get_text_messages(message):
-    try:
-        msg = upcomingEvents()
-        bot.send_message(message.from_user.id, msg, parse_mode='HTML')
-        time.sleep(1)
-    except Exception as e:
-        logging.error("Exception occured: ", exc_info=True)
-        bot.send_message(message.from_user.id, "Так, босс, щас обдумаем тут помаленьку и все оформим. "
-                                               "Погоди чуток")
-        time.sleep(5)
-        msg = upcomingEvents()
-        bot.send_message(message.from_user.id, msg, parse_mode='HTML')
-
+    for i in range(10):
+        try:
+            msg = upcomingEvents()
+            bot.send_message(message.from_user.id, msg, parse_mode='HTML')
+            time.sleep(1)
+        except Exception as e:
+            logging.error("Exception occured: ", exc_info=True)
+            bot.send_message(message.from_user.id, "Так, босс, щас обдумаем тут помаленьку и все оформим. "
+                                                  "Погоди чуток")
+        else:
+            logging.info('done')
+            break
 
 # функция для добавления нового места, ну клево же!
 @bot.message_handler(func=lambda message: message.chat.id in users, commands=['place'])
 def get_text_messages(message):
-    try:
-        sent = bot.send_message(message.from_user.id, 'Напиши плз в формате <b>город</b> / <b>место</b> /'
-                                                      '<b>краткое описание</b>  и я запомню это местечко!',
-                                parse_mode='HTML')
-        bot.register_next_step_handler(sent, twoStepWriterFile)
-    except Exception as e:
-        logging.error("Exception occured: ", exc_info=True)
-        bot.send_message(message.from_user.id, "Так, босс, щас обдумаем тут помаленьку и все оформим. "
-                                               "Погоди чуток")
-        time.sleep(5)
-        bot.register_next_step_handler(sent, twoStepWriterFile)
+    for i in range(10):
+        try:
+            sent = bot.send_message(message.from_user.id, 'Напиши плз в формате <b>город</b> / <b>место</b> /'
+                                                              '<b>краткое описание</b>  и я запомню это местечко!', parse_mode='HTML')
+            bot.register_next_step_handler(sent, twoStepWriterFile)
+        except Exception as e:
+            logging.error("Exception occured: ", exc_info=True)
+            bot.send_message(message.from_user.id, "Так, босс, щас обдумаем тут помаленьку и все оформим. "
+            "Погоди чуток")
+            time.sleep(5)
+        else:
+            logging.info('done')
+            break
 
 
 def twoStepWriterFile(message):
@@ -68,6 +72,6 @@ def get_text_messages(message):
                                                " Хороший денек сегодня, да?")
 
 
-bot.polling(none_stop=True, interval=10, timeout=100)
+bot.infinity_polling(none_stop=True)
 
 # TODO: добавить добавление и удаление событий в боте
