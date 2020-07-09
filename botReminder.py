@@ -26,13 +26,14 @@ def job():
     except Exception as e:
         print("Тут такое дело... Кароче, надоб посмотреть тебе, чо там у нас по плану")
 
+job()
 
 # schedule.every(1).minutes.do(job)
 # schedule.every().hour.do(job)
-schedule.every().day.at("08:15").do(job)
+# schedule.every().day.at("08:15").do(job)
 # schedule.every().monday.do(job)
 # schedule.every().wednesday.at("13:15").do(job)
 
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+# while True:
+#    schedule.run_pending()
+#    time.sleep(1)
