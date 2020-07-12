@@ -7,6 +7,7 @@ import telebot
 from config import *
 import time
 import logging
+import databaseHandler
 
 users = [427107060]
 
@@ -56,6 +57,17 @@ def twoStepWriterFile(message):
                          parse_mode='HTML')
 
 
+# какие города есть в списке
+@bot.message_handler(func=lambda message: message.chat.id in users, commands=['cities'])
+def get_text_messages(message):
+    try:
+        msg = databaseHandler.checkCity()
+        bot.send_message(message.from_user.id, msg, parse_mode='HTML')
+        time.sleep(1)
+    except Exception as e:
+        pass
+
+
 # сообщение для левых ребят
 @bot.message_handler(func=lambda message: message.chat.id not in users, commands=['event'])
 def get_text_messages(message):
@@ -68,6 +80,6 @@ def get_text_messages(message):
                                                " Хороший денек сегодня, да?")
 
 
-bot.polling(none_stop=True, interval=10, timeout=100)
+bot.infinity_polling(none_stop=True, interval=0, timeout=100)
 
 # TODO: добавить добавление и удаление событий в боте
