@@ -19,14 +19,15 @@ telebot.apihelper.READ_TIMEOUT = 5
 bot = telebot.TeleBot(TOKEN, threaded=False)
 
 
-def job():
+def main():
     try:
         msg = upcomingEvents()
         bot.send_message(427107060, msg, parse_mode='HTML')
     except Exception as e:
         print("Тут такое дело... Кароче, надоб посмотреть тебе, чо там у нас по плану")
 
-job()
+if __name__ == "__main__":
+    main()
 
 # schedule.every(1).minutes.do(job)
 # schedule.every().hour.do(job)
