@@ -11,11 +11,13 @@ import databaseHandler
 
 users = [427107060]
 
+telebot.apihelper.READ_TIMEOUT = 5
+
 apihelper.proxy = {
     'https': 'socks5h://{}:{}@{}:{}'.format(USER2, PASSWORD2, IP2, PORT2)
 }
 
-bot = telebot.TeleBot(TOKEN)
+bot = telebot.TeleBot(TOKEN, threaded = False)
 
 
 # обработка команды event
@@ -80,6 +82,6 @@ def get_text_messages(message):
                                                " Хороший денек сегодня, да?")
 
 
-bot.infinity_polling(none_stop=True, interval=0, timeout=100)
+bot.infinity_polling(none_stop=True)
 
 # TODO: добавить добавление и удаление событий в боте
