@@ -13,9 +13,9 @@ users = [427107060]
 
 telebot.apihelper.READ_TIMEOUT = 5
 
-apihelper.proxy = {
-    'https': 'socks5h://{}:{}@{}:{}'.format(USER2, PASSWORD2, IP2, PORT2)
-}
+# apihelper.proxy = {
+#    'https': 'socks5h://{}:{}@{}:{}'.format(USER2, PASSWORD2, IP2, PORT2)
+# }
 
 bot = telebot.TeleBot(TOKEN, threaded = False)
 
